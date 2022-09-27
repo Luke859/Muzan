@@ -2,58 +2,62 @@ const http = require('http');
 const app = require('./app');
 
 //  la fonction normalizePort renvoie un port valide, qu'il soit fourni sous la forme d'un numéro ou d'une chaîne ;
-const normalizePort = val => {
+// const normalizePort = val => {
 
-    const port = parseInt(val, 10);
+//     const port = parseInt(val, 10);
 
-    if (isNaN(port)) {
-        return val;
-    }
-    if (port >= 0) {
-        return port;
-    }
-    return false;
-};
+//     if (isNaN(port)) {
+//         return val;
+//     }
+//     if (port >= 0) {
+//         return port;
+//     }
+//     return false;
+// };
 
-const port = normalizePort(process.env.PORT || '3000');
-app.set('port', port);
+const port= app.listen(3000, function(){
+	console.log('Serveur en ecoute');
+}); 
+// const port = normalizePort(process.env.PORT || '3000');
+// app.set('port', port);
+console.log('Le serveur fonctionne sur le port : 3000. Pour ce serveur, vous pouvez accéder à : http://127.0.0.1:3000');
 
 // la fonction errorHandler  recherche les différentes erreurs et les gère de manière appropriée. Elle est ensuite enregistrée dans le serveur ;
-const errorHandler = error => {
+// const errorHandler = error => {
 
-    if (error.syscall !== 'listen') {
-        throw error;
-    }
+//     if (error.syscall !== 'listen') {
+//         throw error;
+//     }
 
-    const address = serveur.address();
+//     const address = serveur.address();
 
-    const bind = typeof address === 'string' ? 'pipe ' + address : 'port: ' + port;
+//     const bind = typeof address === 'string' ? 'pipe ' + address : 'port: ' + port;
 
-    switch (error.code) {
-        case 'EACCES':
-        console.error(bind + ' requires elevated privileges.');
-        process.exit(1);
-        break;
+//     switch (error.code) {
+//         case 'EACCES':
+//         console.error(bind + ' requires elevated privileges.');
+//         process.exit(1);
+//         break;
 
-        case 'EADDRINUSE':
-        console.error(bind + ' is already in use.');
-        process.exit(1);
-        break;
+//         case 'EADDRINUSE':
+//         console.error(bind + ' is already in use.');
+//         process.exit(1);
+//         break;
 
-        default:
-        throw error;
-    }
-};
+//         default:
+//         throw error;
+//     }
+// };
 
-const serveur = http.createServer(app);
+// const serveur = http.createServer(app);
 
 // un écouteur d'évènements est également enregistré, consignant le port ou le canal nommé sur lequel le serveur s'exécute dans la console.
-serveur.on('error', errorHandler);
-serveur.on('listening', () => {
+// serveur.on('error', errorHandler);
+// serveur.on('listening', () => {
 
-    const address = serveur.address();
-    const bind = typeof address === 'string' ? 'pipe ' + address : 'port ' + port;
-    console.log('Listening on ' + bind);
-});
+//     const address = serveur.address();
+//     const bind = typeof address === 'string' ? 'pipe ' + address : 'port ' + port;
+//     console.log('Listening on ' + bind);
+// });
 
-serveur.listen(process.env.PORT || 3000);
+// serveur.listen(process.env.PORT || 3000);

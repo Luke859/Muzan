@@ -1,11 +1,13 @@
 const express = require('express');
-
+const path = require('path');
 const app = express();
 
-app.get('/', (req, res) => {
-    res.setHeader('Content-Type','text/html');
-    res.sendFile('../front/index.html');
-})
+app.get('/', function (req, res){
+	res.setHeader('Content-Type','text/html');
+	res.sendFile(path.join(__dirname ,'../front/index.html'));
+	server.use(express.static('front'));
+	server.use('/static', express.static(__dirname + 'front/static'));
+});
 
 module.exports = app;
 
