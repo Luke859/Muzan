@@ -1,10 +1,10 @@
-const express = require('express');
+const express = require('express'); //utiliser le paquet express
 
-const app = express();
+const app = express(); //Crée l'appli express
 
 app.get('/', (req, res) => {
     res.setHeader('Content-Type','text/html');
-    res.sendFile('../front/index.html');
+    res.sendFile('/Project Personnel Informatique/Muzan/front/index.html');
 })
 
 module.exports = app;
