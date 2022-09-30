@@ -1,12 +1,33 @@
 const express = require('express'); //utiliser le paquet express
 const path = require('path');
+const mysql = require('mysql2');
+
+var db = mysql.createConnection({
+  host: "localhost",
+  user: "root",
+  password: "Lukejeff12!",
+});
 
 const app = express(); //Crée l'appli express
 
 app.get('/', (req, res, next) => {
     res.setHeader('Content-Type','text/html');
-    res.sendFile(path.join(__dirname, '/front/index.html'));
-    app.use(express.static('front')) // permet de
+    res.sendFile(path.join(__dirname, '/views/index.html'));
+    app.use(express.static('views'))
+    next();
+});
+app.get('/post', (req, res, next) => {
+    res.setHeader('Content-Type','text/html');
+    res.sendFile(path.join(__dirname, '/views/post.html'));
+    app.use(express.static('views')) 
+    next();
+});
+app.get('/createdb', (req, res, next) => {
+    db.connect((err) => {
+        if (err) throw err;
+        console.log("Connected!");
+        res.send('BDD CONNECTED !');
+      });
     next();
 });
 
