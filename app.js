@@ -1,36 +1,46 @@
 const express = require('express'); //utiliser le paquet express
 const path = require('path');
 const db = require('./BDD/connexion')
-
 const app = express(); //Crée l'appli express
 
-//Définition de l'en-tête
-res.setHeader('Content-Type','text/html');
+//Ressources static
+app.use(express.static(path.join(__dirname, 'assets/img')));
+app.use(express.static(path.join(__dirname, 'assets/css')));
+app.use(express.static(path.join(__dirname, 'assets/js')));
 
-//Les middlewares//
+//Effectue une Requête de la date
+app.use((req, res, next) => {
+    console.log('Requête effectué : ' + Date().toString());
+    next();
+});
+
+//Définition du moteur d'affichage
+app.set('view engine', 'ejs');
+app.set('views', path.join(__dirname,'/views'));
+
 //Page Accueil 
-app.get('/', (req, res, next) => {
-    res.sendFile(path.join(__dirname, '/views/index.html'));
-    app.use(express.static('views'))
-    next();
+app.get('/', (req, res) => {
+    const heure = Date().toString();
+    res.status(200).render('index', { heure });
 });
+
 //Page posts
-app.get('/post', (req, res, next) => {
-    res.sendFile(path.join(__dirname, '/views/post.html'));
-    app.use(express.static('views')) 
-    next();
+app.get('/post', (req, res) => {
+    res.status(200).render('post'); 
 });
+
 //Page connexion BDD avec MySQL
-app.get('/createdb', (req, res, next) => {
+app.get('/createdb', (req, res) => {
     db.connect((err) => {
         if (err) throw err;
         console.log("Connected!");
         res.send('BDD CONNECTED !');
       });
-    next();
 });
 
+//Gère les pages qui ne sont pas valide et affiche une erreur 404
 app.use((req, res) => {
+    res.status(404).render('erreur')
     console.log('Connexion works !!');// réponse dans la console
 })
 
