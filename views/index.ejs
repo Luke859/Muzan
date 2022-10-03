@@ -8,8 +8,16 @@
 </head>
 <body>
     <%- include('./composants/header') %>
-    Arnaud
-    <p> <%= heure %></p>
-    <button id="ajouter" >Hello</button>
+    <br>
+    <h1>SELECT posts de la BDD MySQL</h1>
+
+    <% for(i= 0; i < resultat.length; i++) { %>
+        <p> Id : <%= resultat[i].idposts %></p>
+        <p> Titre : <%= resultat[i].titre %></p>
+        <p> Message : <%= resultat[i].message %></p>
+        <br>
+    <% } %>
+    
+    <!-- <button id="ajouter" >Hello</button> -->
 </body>
 </html>

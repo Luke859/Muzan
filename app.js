@@ -20,8 +20,14 @@ app.set('views', path.join(__dirname,'/views'));
 
 //Page Accueil 
 app.get('/', (req, res) => {
-    const heure = Date().toString();
-    res.status(200).render('index', { heure });
+
+    let sql = 'SELECT * FROM posts';
+    db.query(sql, (err, resultat) => {
+        if (err) throw err;
+        console.log(resultat);
+        //return res.send('Selected posts !');
+        return res.status(200).render('index', { resultat });
+    });
 });
 
 //Page posts
