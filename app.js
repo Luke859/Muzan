@@ -37,6 +37,15 @@ app.get('/', (req, res) => {
 });
 
 //Page posts
+app.get('/post', (req, res) => {
+    db.connect((err) => {
+        if (err) throw err;
+        console.log("Page post");
+        res.status(200).render('post');
+    })
+});
+
+//Envoie du formulaire en BDD 
 app.post('/post', (req, res) => {
     // console.log(req.body.titre);
     // console.log(req.body.message);
