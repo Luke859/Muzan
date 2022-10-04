@@ -8,6 +8,10 @@ app.use(express.static(path.join(__dirname, 'assets/img')));
 app.use(express.static(path.join(__dirname, 'assets/css')));
 app.use(express.static(path.join(__dirname, 'assets/js')));
 
+//Extraction des données du formulaires
+app.use(express.json());
+app.use(express.urlencoded({ extended: false}));
+
 //Effectue une Requête de la date
 app.use((req, res, next) => {
     console.log('Requête effectué : ' + Date().toString());
@@ -23,7 +27,9 @@ app.get('/', (req, res) => {
 
     let sql = 'SELECT * FROM posts';
     db.query(sql, (err, resultat) => {
-        if (err) throw err;
+        if (err)
+        console.log(err)
+        else
         console.log(resultat);
         //return res.send('Selected posts !');
         return res.status(200).render('index', { resultat });
@@ -31,8 +37,19 @@ app.get('/', (req, res) => {
 });
 
 //Page posts
-app.get('/post', (req, res) => {
-    res.status(200).render('post'); 
+app.post('/post', (req, res) => {
+    // console.log(req.body.titre);
+    // console.log(req.body.message);
+    let post = [req.body.titre, req.body.message];
+    let sql = "INSERT INTO posts(titre, message) VALUES(?, ?)";
+    db.query(sql, post, (err, resultats) => {
+        if (err)
+        console.log(err);
+        else
+        console.log(resultats);
+        res.redirect('/');
+        return res.status(200).render('post', { resultats });
+    });
 });
 
 //Page connexion BDD avec MySQL

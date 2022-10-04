@@ -9,15 +9,27 @@
 <body>
     <%- include('./composants/header') %>
     <br>
-    <h1>SELECT posts de la BDD MySQL</h1>
+    <section>
+        <form action="/post" method="POST">
+            <label for="titre">Titre</label>
+            <input type="text" id="titre" name="titre">
+            <label for="message">Message</label>
+            <textarea name="message" id="message" cols="20" rows="5"></textarea>
+            <br>
+            <input type="submit" value="Enregistrer">
+        </form>
+    </section>
+    <section>
+        <h1>SELECT posts de la BDD MySQL</h1>
 
-    <% for(i= 0; i < resultat.length; i++) { %>
-        <p> Id : <%= resultat[i].idposts %></p>
-        <p> Titre : <%= resultat[i].titre %></p>
-        <p> Message : <%= resultat[i].message %></p>
-        <br>
-    <% } %>
-    
-    <!-- <button id="ajouter" >Hello</button> -->
+        <% for(i= 0; i < resultat.length; i++) { %>
+
+            <p> Id : <%= resultat[i].idposts %></p>
+            <p> Titre : <%= resultat[i].titre %></p>
+            <p> Message : <%= resultat[i].message %></p>
+            <br>
+
+        <% } %>
+    </section>
 </body>
 </html>
