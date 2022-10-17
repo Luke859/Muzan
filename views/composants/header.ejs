@@ -1,10 +1,138 @@
 <header>
-    <h1>Navbar</h1>
-    <nav>
-        <ul>
-            <li><a href="/">Accueil</a></li>
-            <li><a href="/post">Post</a></li>
-            <li><a href="/erreur">Page erreur</a></li>
-        </ul>
+    <link rel="stylesheet" href="../static/style.css">
+    <nav class="navbar">
+            <img src="/Kotlin_logo.svg.png">
+            <div class="nav-links">
+                <ul>
+                    <li><a href="/">Accueil</a></li>
+                    <li><a href="#">Concept</a></li>
+                    <li><a href="#">Talents</a></li>
+                    <li><a href="#">Entreprises</a></li>
+                    <li><a href="#">Blog</a></li>
+                    <li><a href="/post">Post</a></li>
+                    <li><a href="/erreur">Page erreur</a></li>
+                    <li><button type="button" class="btn">Inscription</button></li>        
+                </ul>
+            </div>
+        <img src="src/img/menu-burger-iconpng.png" alt="menu hamburger" class="menu-hamburger">
     </nav>
 </header>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    text-decoration: none;
+    list-style: none;
+}
+
+body {
+    font-family: 'IBM Plex Sans KR';
+    background-color: #D7CCCC;
+
+}
+
+header {
+    height: 100vh;
+    width: 10vw;
+    background-color: #D7CCCC;
+    background-size: cover;
+    /* border: 1px solid; */
+}
+
+.navbar {
+    position: absolute;
+    padding: 15px 50px;
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    box-sizing: border-box;
+    align-items: center;
+    border-bottom: 1px solid;
+}
+
+.navbar .a {
+    color: white;
+}
+
+.navbar img {
+    width: 11em;
+    font-weight: bold;
+}
+
+.navbar .nav-links ul {
+    display: flex;
+    align-items: center;
+}
+
+.navbar .nav-links ul li {
+    margin: 0 25px;
+    font-size: 1em;
+}
+
+.navbar .nav-links ul li a {
+    color: black;
+}
+
+.navbar .nav-links ul li a:hover {
+    font-weight: bold;
+}
+
+.navbar .nav-links ul li .btn {
+  -webkit-border-radius: 7;
+  -moz-border-radius: 7;
+  border-radius: 7px;
+  font-family: Arial;
+  color: #ffffff;
+  font-size: 15px;
+  background: #6c1ced;
+  padding: 12px 25px;
+  text-decoration: none;
+  border: none;
+}
+
+.navbar .nav-links ul li .btn:hover {
+  background: #793bff;
+  text-decoration: none;
+}
+
+.navbar .menu-hamburger {
+    display: none;
+    position: absolute;
+    right: 50px;
+    top: 50px;
+    width: 35px;
+}
+
+
+@media screen and (max-width: 900px) {
+    .navbar {
+        padding: 0;
+        border: none;
+    }
+
+    .navbar .menu-hamburger {
+        display: block;
+    }
+
+    .nav-links {
+        top: 0;
+        left: 0;
+        position: absolute;
+        background-color: #D7CCCC;
+        backdrop-filter: blur(7px);
+        display: flex;
+        width: 180%;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .nav-links ul {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+}
+</style>
